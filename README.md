@@ -22,6 +22,7 @@ Analysis: Time series prediction tasks;
 1.2.1 Data volume:
 Training data: 500 data samples, used to train the AI ​​model;
 (400 pieces of qualified data and 100 pieces of unqualified data)
+![image](https://github.com/user-attachments/assets/322c4022-ecf5-414e-9ac1-7453b3f5219b)
 
 Test data: 40 test samples, used to test the accuracy of the AI ​​model;
 (20 pieces of qualified data, 20 pieces of unqualified data, and the above 500 pieces are not repeated)
