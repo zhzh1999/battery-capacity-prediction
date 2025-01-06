@@ -1,6 +1,6 @@
 Battery prediction
 
-
+This battery capacity prediction project use LLM to produce negative data as the negative training data set is very hard to get. After that data cleaning and augmentation, we use random forest to create the model so that the model has very small footprint (<100M) for an industrial controller with only 4G memory and flash.
 
 0 Project Requirements
 
@@ -54,133 +54,12 @@ Test data: 40 test samples to test the accuracy of the AI model;
 
 Visualize 500 training data:
 
-
-
-From the above analysis chart, we can see that
-
-Q1: There is an abnormal value, the voltage is over 200;
-
-Checking the table, we can see that the data in item 268 is abnormal: remove the abnormal data; and display it visually;
-
-
-
-
-
-
-
-Q2: Initial voltage abnormality: The voltage value at the first moment is greater than 2.2v: Screening:
-
-
-
-
-
-Visual display:
-
-Q3: When the voltage is lower than 1.8V, no sampling is performed, which is not in line with objective laws if you want to fit the curve.
-
-So we can sample the data 10 hours ago, when the voltage value is 1.8v, according to the slope at that moment to get the value at the next moment. Or we can re-interpolate according to the regression model;
-
-
-
-
-
-
-
-
-
-400 data visualizations:
-
-Why do most data have a significant turning point in the second hour?
-
-
-
-It can be clearly seen from the figure that for a normal battery, the discharge slope is relatively stable; for an abnormal battery, the initial voltage is lower, but the discharge slope is larger; this is in line with the real physical laws.
-
-
-
-
-
-The first 100 cases of data:
-
-Q5: Some data at the later moment is higher than that at the previous moment;
-
-Need to be screened out; these data are equivalent to noise data and will affect the training of the model. The higher the quality of the training data, the better the performance of the model.
-
-
-
-
-
-The first 50 cases of normal data:
-
-
-
-
-
-
-
-Abnormal battery voltage data:
-
-Q6: The data changes dramatically and does not change when it is below 1.8V.
-
-
-
-
-
-
-
-
-
-
-
-
-
-40 test data:
-
-Q: Is the slope of the unqualified battery below 1.8v the real value?
-
-Therefore, the accuracy of the predicted value of the data after 7 hours is not that great, and the focus is on the accuracy of the voltage value at the 10th hour.
-
-And in line with the principle of not letting go of the wrong ones, when it is very close to 1.8, it may also be judged as unqualified.
-
-In fact, the test data here is lower than 1.8, or around 1.8, and it is also filled in manually , which does not conform to the actual rules .
-
-
-
-
-
-
-
-
-
-
-
 1.3 Data preprocessing:
-
 
 
 1 Delete the data whose later moment is higher than the previous moment:
 
 Before and after deletion:
-
-Check: There are the following data:
-
-[12, 12, 105, 106, 154, 154, 275, 275, 276, 276, 277, 309, 334, 334, 336, 337, 338, 338, 357, 358, 359, 360, 397, 411, 412, 414, 415, 415, 436, 453]
-
-30
-
-[3, 8, 2, 2, 3, 7, 2, 5, 2, 5, 2, 1, 1, 6, 1, 1, 6, 10, 1, 1, 1, 1, 10, 1, 1, 1, 1, 3, 1, 1]
-
-30
-
-
-
-
-
-2 For the voltage that hovered around 1.8 before 10 hours, the training data was regressed and interpolated:
-
-
-
-For the voltage that hovered around 1.8 before 10 hours, regression interpolation was performed and the minimum value was 0;
 
 
 
@@ -241,51 +120,14 @@ Therefore, we will further refine the preprocessing of training data and perform
 Conduct a keys study:
 
 
-
-
-
 I think the problem lies in the data at point 2. If the slope changes for no reason at point 2, the final result will be 1.8 or greater than 1.8. So in a sense, the test data also needs to be interpolated using the same method.
-
-
-
-
-
 
 
 3 Test data interpolation:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 1.4 Data augmentation:
 
-
-
-
-
-
-
-
-
-
-
-
-
 2 Model training and testing- Machine learning
-
 
 
 Data collection : Collect data for training the model. This data can come from databases, files, the Internet, or other data sources.
@@ -315,11 +157,6 @@ Adjust the model's hyperparameters to optimize performance.
 Model tuning : Find the optimal parameters of the model through cross-validation, grid search and other methods.
 
 Model Validation : Use the test set to evaluate the performance of the final model and ensure that the model is not overfitting or underfitting.
-
-
-
-
-
 
 
 2.1 Model training effect before data preprocessing:
@@ -467,50 +304,6 @@ Therefore, this also shows the significance of re-interpolating and cleaning the
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-2.1.4 Some other regression models:
-
-
-
-
-
-
-
 2.2 Model training effect after data preprocessing:
-
-
-
-Some other regression models
-
-
-
-
-
-
-
-
-
-1 RF
-
-
-
-
-
-
-
-
-
-2 lightGBM
+LBGN
 
