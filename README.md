@@ -135,6 +135,8 @@ Data collection : Collect data for training the model. This data can come from d
 Data preprocessing :
 
 Cleaning data : handling missing values, outliers, and duplicate data.
+![image](https://github.com/user-attachments/assets/17b2db99-e7ae-4841-9ba3-1e94cb330345)
+
 
 Feature selection : Select features that are useful for the model.
 
@@ -290,6 +292,7 @@ Visual display of test data:
 Visualization of 40 data from the original test:
 
 
+![image](https://github.com/user-attachments/assets/551491bf-66a1-4cb4-9c62-5618abd8028a)
 
 
 
@@ -301,9 +304,7 @@ This is actually fitting the noise of the training data, because the training da
 
 Therefore, this also shows the significance of re-interpolating and cleaning the data after the unqualified data is below 1.8.
 
+![image](https://github.com/user-attachments/assets/a588141b-4fd4-429f-9a60-694bf21132b4)
 
 
-
-2.2 Model training effect after data preprocessing:
-LBGN
 
